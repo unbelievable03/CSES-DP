@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define         int                 long long
+#define         pb                  push_back
+#define         all(x)              (x).begin(),(x).end()
+#define         sz(x)               (int)((x).size())
+#define         FOR(i,a,b)          for(int i=a;i<b;i++)
+#define         vi                  vector<int>
+#define         mod                 1000000007
+#define         endl                "\n"
+void solve()
+{
+    int n,x;
+    cin>>n>>x;
+    vi v(n);
+    FOR(i,0,n){
+        cin>>v[i];
+    }
+    vi dp(x+1,mod);
+    dp[0]=0;
+    FOR(i,1,x+1){
+        FOR(j,0,sz(v)){
+            if(v[j]<=i){
+                dp[i]= min(dp[i],1+ dp[i-v[j]]);
+            }
+        }
+    }
+    if(dp[x]==mod){
+        cout<<-1<<endl;return;
+    }
+    else{
+        cout<<dp[x]<<endl;
+    }
+}
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    int T=1;
+    //cin>>T;
+    while(T--){solve();}
+    return 0;
+}
