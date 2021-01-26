@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define         int                 long long
+#define         pb                  push_back
+#define         all(x)              (x).begin(),(x).end()
+#define         sz(x)               (int)((x).size())
+#define         FOR(i,a,b)          for(int i=a;i<b;i++)
+#define         vi                  vector<int>
+#define         mod                 1000000007
+#define         endl                "\n"
+vi getDigits(int n){
+    vi result;
+    while(n>0){
+        if(n%10!=0){
+            result.pb(n%10);
+        }
+        n/=10;
+    }
+    return result;
+}
+void solve()
+{
+    int n;
+    cin>>n;
+    vi dp(n+1,mod);
+    FOR(i,1,10){dp[i]=1;}
+    FOR(i,10,n+1){
+        vi digits= getDigits(i);
+        FOR(j,0,sz(digits)){
+            if(digits[j]<=i){
+                dp[i]= min(dp[i],1+dp[i-digits[j]]);
+            }
+        }
+    }
+    cout<<dp[n]<<endl;
+    
+}
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);cout.tie(0);
+    int T=1;
+    //cin>>T;
+    while(T--){solve();}
+    return 0;
+}
